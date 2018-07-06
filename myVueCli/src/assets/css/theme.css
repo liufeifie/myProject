@@ -1,0 +1,311 @@
+@charset "utf-8";
+@import "mintui.css";
+/* 去闪 */
+
+[v-cloak] {
+    display: none;
+}
+
+
+body,
+button,
+input,
+select,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Microsoft YaHei", "微软雅黑", SimHei, "Arial", "宋体", "Times New Roman", Times, serif, 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    -webkit-tap-highlight-color: transparent;
+    -moz-outline: none;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -webkit-appearance: none;
+    /* Safari */
+}
+
+select,
+select:focus,
+input[type='text'],
+input[type='tel'],
+input[type='date'],
+input[type='password'] {
+    border: none;
+}
+
+input:required:invalid,
+input:focus:invalid,
+textarea:required:invalid,
+textarea:focus:invalid {
+    box-shadow: none;
+}
+
+input,
+button,
+select,
+textarea {
+    outline: none;
+    border: none;
+}
+
+button {
+    background: transparent;
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+select {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+textarea {
+    resize: none;
+}
+
+b,i {
+    font-weight: normal;
+}
+
+/**
+ * [clearfix 清浮动]
+ * @type {[type]}
+ */
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+
+/**
+ * [display 影藏，显示]
+ * @type {[type]}
+ */
+
+.hide {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+
+/**
+ * 取消a 点击时的边框
+ */
+
+a {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+}
+
+/**
+ * 超出省略
+ */
+
+.ws {
+    overflow: hidden;
+    word-wrap: normal;
+    word-break: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/**
+ * 定位
+ */
+
+.pr {
+    position: relative;
+}
+
+.pa {
+    position: absolute;
+}
+
+.pf {
+    position: fixed;
+}
+
+.pf-center {
+    position: fixed;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 100%
+}
+
+/**
+ * [input 取消input点击的时候的默认外框]
+ * @type {[type]}
+ */
+
+input:focus,
+button,
+button:focus {
+    outline: none;
+    -moz-outline: none;
+    -webkit-tap-highlight-color: transparent;
+    /*  border: none; */
+    /*   box-shadow: none; */
+}
+
+/**
+ * 居中  靠右  靠左
+ */
+
+.tc {
+    text-align: center;
+}
+
+.tl {
+    text-align: left;
+}
+
+.tr {
+    text-align: right;
+}
+
+/**
+ * vertical-align
+ */
+
+.vt {
+    vertical-align: top;
+}
+
+.vm,
+img {
+    vertical-align: middle;
+}
+
+.vb {
+    vertical-align: bottom;
+}
+
+
+
+/**
+ * flex布局
+ */
+.flex {
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    display: box;
+    /* OLD - Android 4.4- */
+}
+ .align-center{
+     /* 09版 */
+     -webkit-box-align: center;
+     /* 12版 */
+     -webkit-align-items: center;
+     -moz-align-items: center;
+     -ms-align-items: center;
+     -o-align-items: center;
+     align-items: center;
+ }
+.justify-center {
+    -webkit-box-pack: center;
+    /*主轴对齐方式 旧写法*/
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+
+/*标签tag*/
+
+.hyh-tag {
+    box-sizing: border-box;
+    display: -webkit-box;
+    /* 老版本语法: Safari, iOS, Android browser, older WebKit browsers. */
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    box-orient: vertical;
+    flex-direction: column;
+    flex-shrink: 0;
+    align-items: stretch;
+    box-align: stretch;
+    align-content: flex-start;
+    position: relative;
+}
+.nobor {
+    border: none;
+}
+
+.nobg {
+    background: none;
+}
+
+.fbold {
+    font-weight: bold;
+}
+
+.oh {
+    overflow: hidden;
+}
+
+.oa {
+    overflow: auto;
+}
+
+.max750 {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+
+
