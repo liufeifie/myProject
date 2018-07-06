@@ -1,0 +1,83 @@
+/*****递归循环编译开始******/
+html .color1 {
+  color: #000000;
+}
+html .bgColor1 {
+  background-color: #000000;
+}
+html .borderColor1 {
+  border-style: #000000;
+}
+html .color2 {
+  color: #FF0000;
+}
+html .bgColor2 {
+  background-color: #FF0000;
+}
+html .borderColor2 {
+  border-style: #FF0000;
+}
+html .color3 {
+  color: #00FF00;
+}
+html .bgColor3 {
+  background-color: #00FF00;
+}
+html .borderColor3 {
+  border-style: #00FF00;
+}
+html .color4 {
+  color: #0000FF;
+}
+html .bgColor4 {
+  background-color: #0000FF;
+}
+html .borderColor4 {
+  border-style: #0000FF;
+}
+html .color5 {
+  color: #FFFF00;
+}
+html .bgColor5 {
+  background-color: #FFFF00;
+}
+html .borderColor5 {
+  border-style: #FFFF00;
+}
+html .color6 {
+  color: #00FFFF;
+}
+html .bgColor6 {
+  background-color: #00FFFF;
+}
+html .borderColor6 {
+  border-style: #00FFFF;
+}
+html .color7 {
+  color: #FF00FF;
+}
+html .bgColor7 {
+  background-color: #FF00FF;
+}
+html .borderColor7 {
+  border-style: #FF00FF;
+}
+html .color8 {
+  color: #C0C0C0;
+}
+html .bgColor8 {
+  background-color: #C0C0C0;
+}
+html .borderColor8 {
+  border-style: #C0C0C0;
+}
+html .color9 {
+  color: #FFFFFF;
+}
+html .bgColor9 {
+  background-color: #FFFFFF;
+}
+html .borderColor9 {
+  border-style: #FFFFFF;
+}
+/*****递归循环编译结束******/

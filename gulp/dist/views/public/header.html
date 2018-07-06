@@ -1,0 +1,22 @@
+<div id="header">
+  <div class="boxContent bgColor1">
+    <ul class="clearfix h60 lh60 color9 text-center f22" id="headerNav">
+      <li class="fl wp12"><a href="/" class="color9 pl10 pr10">首页</a></li>
+      <li class="fl wp12"><a href="/myStudy" class="color9 pl10 pr10">我的学习</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  $(function () {
+    var $router = window.location
+    var currentPath = $router.pathname
+    $('#headerNav>li>a').each(function (index, item) {
+      var href = $(item).attr('href')
+      if (href === currentPath) {
+        item.className = 'bgColor9 color2 pl10 pr10'
+      } else if (currentPath.indexOf(href) !== -1 && href !== '/') {
+        item.className = 'bgColor9 color2 pl10 pr10'
+      }
+    })
+  })
+</script>

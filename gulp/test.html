@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+　　<div id='div'></div>
+　　<div class='div'></div>
+　　<div class='div'></div>
+　　<div class='div'></div>
+    <input type="text" name="hobby">
+    <input type="text" name="hobby">
+<script>
+  var divId = document.getElementById('div')
+  var divClass = document.getElementsByClassName('div')
+  var div = document.getElementsByTagName('div')
+  var inputName = document.getElementsByName('hobby')
+  console.log(divId)
+  console.log(divClass)
+  console.log(div)
+  console.log(inputName)
+  function $ (tag) {
+    var el = document.querySelectorAll(tag)
+    if (el.length === 1) return el[0]
+    return el
+  }
+  console.log($('div'))
+  console.log($('#div'))
+</script>
+</body>
+</html>

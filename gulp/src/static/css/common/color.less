@@ -1,0 +1,31 @@
+@color1: #000000;
+@color2: #FF0000;
+@color3: #00FF00;
+@color4: #0000FF;
+@color5: #FFFF00;
+@color6: #00FFFF;
+@color7: #FF00FF;
+@color8: #C0C0C0;
+@color9: #FFFFFF;
+/*****递归循环编译开始******/
+html{.common(@color1, 1)}
+html{.common(@color2, 2)}
+html{.common(@color3, 3)}
+html{.common(@color4, 4)}
+html{.common(@color5, 5)}
+html{.common(@color6, 6)}
+html{.common(@color7, 7)}
+html{.common(@color8, 8)}
+html{.common(@color9, 9)}
+.common(@color, @i){
+  .color@{i} {
+    color: @color;
+  }
+  .bgColor@{i} {
+    background-color: @color;
+  }
+  .borderColor@{i} {
+    border-style: @color;
+  }
+}
+/*****递归循环编译结束******/
