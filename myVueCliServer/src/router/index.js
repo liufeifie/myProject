@@ -11,6 +11,10 @@ export default function createRouter () {
         path: '/',
         name: 'home',
         component: () => import('@/views/home')
+      }, {
+        path: '/person',
+        name: 'person',
+        component: () => import('@/views/person')
       }
     ]
   })

@@ -1,6 +1,9 @@
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
+const proxy = require('http-proxy-middleware')
+const cookie = require('cookie-parser')
+const config = require('./config')
 const { createBundleRenderer } = require('vue-server-renderer')
 // html-minifier来实现HTML文件压缩
 const { minify } = require('html-minifier')
@@ -14,6 +17,16 @@ const renderer = createBundleRenderer(require('./dist/vue-ssr-server-bundle.json
   basedir: resolve('./dist')
 })
 app.use(express.static(path.join(__dirname, 'dist')))
+app.use(cookie())
+
+// 跨域代理
+let proxyKey = Object.keys(config.dev.proxyTable)
+if (proxyKey.length) {
+  proxyKey.forEach((item) => {
+    app.use(item, proxy(config.dev.proxyTable[item]))
+  })
+}
+
 app.get('*', (req, res) => {
   res.setHeader('Content-Type', 'text/html')
   const handleError = err => {
@@ -24,16 +37,18 @@ app.get('*', (req, res) => {
     } else {
       res.status(500).send('500 | Internal Server Error')
       console.error(`error during render : ${req.url}`)
-      console.error(err.stack)
+      console.error('err.stack: ', err.stack)
     }
   }
 
+  // 设置cookie
+  res.cookie('token', '15555977387', { expires: new Date(Date.now() + 900000), httpOnly: true });
   const context = {
     title: '小火柴的前端小站',
-    url: req.url
+    url: req.url,
+    cookie: req.cookies
   }
   renderer.renderToString(context, (err, html) => {
-    console.log(err)
     if (err) {
       return handleError(err)
     }
@@ -42,6 +57,6 @@ app.get('*', (req, res) => {
 })
 
 app.on('error', err => console.log(err))
-app.listen(8080, () => {
-  console.log(`vue ssr started at localhost: 8080`)
+app.listen(config.dev.port, () => {
+  console.log(`vue ssr started at localhost: ${config.dev.port}`)
 })

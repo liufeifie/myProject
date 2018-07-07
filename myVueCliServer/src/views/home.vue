@@ -5,11 +5,12 @@
     <h1>首页11</h1>
     <h1>首页11</h1>
     <h1>首页11</h1>
+    <router-link to="/person">个人</router-link>
     <p v-text="message"></p>
+    <div>{{SERVER_DATA}}</div>
   </div>
 </template>
 <script>
-import axios from 'axios'
 export default {
   data: () => {
     return {
@@ -19,32 +20,37 @@ export default {
   pageConfig () {
     return {
       title: 'home',
-      bodyStyle: 'background-color:  #fff;'
+      bodyStyle: 'background-color:  #fff;',
+      SERVER_DATA: {}
     }
   },
+  asyncData ({store, route}) {
+    return store.dispatch('FETCH', [
+      {
+        urlKey: 'test',
+        key: 'test'
+      }, {
+        urlKey: 'pcx',
+        key: 'pcx'
+      }
+    ])
+  },
   created () {
+    console.log('home SERVER_DATA', this.$store.getters['SERVER_DATA']())
+    this.SERVER_DATA = this.$store.getters['SERVER_DATA']()
   },
   mounted () {
-    console.log(axios)
-    const instance = axios.create({
-      /* baseURL: 'http://www.server.com', */
-      timeout: 50000,
-      // headers: {'Content-Type': 'application/json;charset=UTF-8'}
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    })
-    instance.interceptors.response.use((res) => {
-      if (res.status >= 200 && res.status < 300) {
-        return res
+    /* this.$store.dispatch('FETCH', [
+      {
+        urlKey: 'test',
+        key: 'test'
+      }, {
+        urlKey: 'pcx',
+        key: 'pcx'
       }
-      return Promise.reject(res)
-    }, (error) => {
-      return Promise.reject({message: error.message || '网络异常，请刷新重试', code: 404})
-    })
-    instance.get('api/index.php').then(res => {
-      console.log(res)
-    }).catch((error) => {
-      console.log(error)
-    })
+    ]).then(data => {
+      console.log('测试', data)
+    }) */
   },
   methods: {},
   components: {}

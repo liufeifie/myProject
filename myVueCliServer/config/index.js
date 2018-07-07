@@ -5,6 +5,7 @@
 const path = require('path')
 
 module.exports = {
+  // 开发环境
   dev: {
 
     // Paths
@@ -48,6 +49,7 @@ module.exports = {
     cssSourceMap: true
   },
 
+  // 生产环境
   build: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
