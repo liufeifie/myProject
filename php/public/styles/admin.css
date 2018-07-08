@@ -1,0 +1,101 @@
+/**弹出框*/
+.delete{
+    cursor: pointer;
+}
+.infoTip{
+    margin: 50px 0;
+}
+.cancel{
+    margin-left: 30px;
+}
+/**后台首页*/
+.table th{
+    text-align: center;
+}
+
+/*文章页面*/
+.article th{
+    text-align: right;
+}
+.welcome img{
+    width: 100%;
+    height: 650px;
+}
+/*头部*/
+.top{
+    height: 70px;
+    line-height: 70px;
+    background: white;
+}
+#list{
+    margin: 0;
+    padding: 0;
+    font-size: 36px;
+    position: relative;
+    top:12px;
+}
+.imgLogo{/*logo图片*/
+    box-shadow: 0 0 8px #ddd;
+}
+#dLabel .username{
+    font-weight: 800;
+}
+#dLabel .username~span:hover{
+    color: red;
+}
+/*中间*/
+.middleLeft{
+    position: relative;
+    height: 650px;
+    background: #18a7cc;
+    padding-top:5px
+}
+.middleRight{
+    width:83%;
+    height: 650px;
+    padding: 0;
+}
+
+.middleRight iframe{
+    height:100%;
+    width: 100%;
+}
+
+/*底部*/
+/**后台登录*/
+.loginBg{
+    background-image: url(../images/loginBg.jpg);
+}
+.login{
+    border: 1px solid #ddd;
+    box-shadow: 0 0 8px #ddd;
+    border-radius: 8px;
+    background: white;
+    width: 300px;
+    height: 250px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top:0;
+    bottom: 0;
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+/**
+后台广告样式*/
+.breadcrumb{
+    margin-bottom: 0;
+}
+.preview{
+    width: 100px;
+}
+.container{
+    margin-top: 100px;
+}

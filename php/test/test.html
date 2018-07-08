@@ -1,0 +1,141 @@
+private function php()
+{
+/**获取php试题*/
+$phpAllExamData = $this->model->getAllRandExam('php题库');
+/**提交成绩*/
+if (isset($_POST['send'])) {
+if (count($_POST) != 1) {
+$exam = new examModel();
+array_pop($_POST);
+//                 id   answer
+foreach ($_POST as $k => $v) {
+$test[] = $v;//获取做题答案
+$PhpExamData[] = $exam->getOneExam($k);//获取选择的是哪几条题目
+}
+foreach ($PhpExamData as $k => $v) {
+$answer[] = array('id' => $v->id, 'answer' => $v->answer);//正确答案
+$test_num = array('test_num' => ++$v->test_num);
+$exam->updateExam($test_num, $v->id);//修改题目出现的次数
+}
+$score = 0;
+for ($i = 0; $i < count($answer); $i++) {
+if ($test[$i] == $answer[$i]['answer']) {
+$score++;//获取分数
+$oneExam = $exam->getOneExam($answer[$i]['id']);
+$true_num = array('true_num' => ++$oneExam->true_num);
+$exam->updateExam($true_num, $oneExam->id);//修改题目正确的次数
+}
+}
+$array = array(
+'user' => $_SESSION['oneMember']->user,
+'score' => $score,
+'nid' => 'php题库',
+'reg_time' => date('Y-m-d H:i:s')
+);
+$this->smarty->assign('answer', $answer);
+$this->smarty->assign('test', $test);
+//加入成绩
+$this->model->addGrade($array);
+sleep(2);
+$this->smarty->assign('tip', '提交成功');
+/* if ($this->model->addGrade($array)) {
+Tools::Progress('成绩提交成功',$_SERVER['HTTP_REFERER'], 1, 10);
+} else {
+Tools::Progress('成绩提交失败', $_SERVER['HTTP_REFERER'], 0);
+}*/
+} else {
+Tools::Progress('请答题', $_SERVER['HTTP_REFERER'], 0);
+}
+} else {
+$rand = array();
+$flag = 5;
+for ($i = 0; $i < $flag; $i++) {
+$num = rand(0, count($phpAllExamData) - 1);
+if (!in_array($num, $rand)) {
+$rand[] = $num;
+} else {
+$flag++;
+}
+}
+/*获取随机题目*/
+foreach ($rand as $k => $v) {
+$PhpExamData[] = $phpAllExamData[$v];
+}
+}
+/*试题*/
+$this->smarty->assign('PhpExamData', $PhpExamData);
+$this->smarty->assign('php', true);
+}
+
+
+
+
+
+
+
+
+
+/**获取js试题*/
+$jsAllExamData = $this->model->getAllRandExam('js题库');
+/**提交成绩*/
+if (isset($_POST['send'])) {
+if (count($_POST) != 1) {
+$exam = new examModel();
+array_pop($_POST);
+//                 id   answer
+foreach ($_POST as $k => $v) {
+$test[] = $v;//获取做题答案
+$JsExamData[] = $exam->getOneExam($k);//获取选择的是哪几条题目
+}
+foreach ($JsExamData as $k => $v) {
+$answer[] = array('id' => $v->id, 'answer' => $v->answer);//正确答案
+$test_num = array('test_num' => ++$v->test_num);
+$exam->updateExam($test_num, $v->id);//修改题目出现的次数
+}
+$score = 0;
+for ($i = 0; $i < count($answer); $i++) {
+if ($test[$i] == $answer[$i]['answer']) {
+$score++;//获取分数
+$oneExam = $exam->getOneExam($answer[$i]['id']);
+$true_num = array('true_num' => ++$oneExam->true_num);
+$exam->updateExam($true_num, $oneExam->id);//修改题目正确的次数
+}
+}
+$array = array(
+'user' => $_SESSION['oneMember']->user,
+'score' => $score,
+'nid' => 'php题库',
+'reg_time' => date('Y-m-d H:i:s')
+);
+$this->smarty->assign('answer', $answer);
+$this->smarty->assign('test', $test);
+//加入成绩
+$this->model->addGrade($array);
+sleep(2);
+$this->smarty->assign('tip', '提交成功');
+/* if ($this->model->addGrade($array)) {
+Tools::Progress('成绩提交成功', '?a=home');
+} else {
+Tools::Progress('成绩提交失败', $_SERVER['HTTP_REFERER'], 0);
+}*/
+} else {
+Tools::Progress('请答题', $_SERVER['HTTP_REFERER'], 0);
+}
+}else{
+$rand = array();
+$flag = 10;
+for ($i = 0; $i < $flag; $i++) {
+$num = rand(0, count($jsAllExamData) - 1);
+if (!in_array($num, $rand)) {
+$rand[] = $num;
+} else {
+$flag++;
+}
+}
+/*获取随机题目*/
+foreach ($rand as $k => $v) {
+$JsExamData[] = $jsAllExamData[$v];
+}
+}
+/*随机试题*/
+$this->smarty->assign('JsExamData', $JsExamData);

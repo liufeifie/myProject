@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>personal data</title>
+    <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="libs/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="public/styles/home.css" rel="stylesheet">
+    <link href="public/styles/Tools.css" rel="stylesheet">
+    <script src="libs/requireJS/require.js" data-main="public/scripts/home"></script>
+</head>
+<body>
+{include file='home/header.html'}
+<div class="container">
+    {if $showInfo}
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li><a href="?a=home">首页</a></li>
+                <li><a href="?a=home&m=updateInfo">修改信息</a></li>
+                <li class="active">个人信息</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped table-hover person">
+                <tr>
+                    <th width="120">会员名称</th>
+                    <td class="text-center"><h2>{$smarty.session.oneMember->user}</h2></td>
+                </tr>
+                <tr>
+                    <th width="">会员头像</th>
+                    <td>
+                        <img src="public/uploads/register/{$smarty.session.oneMember->pic}" width="50" height="50">
+                    </td>
+                </tr>
+                <tr>
+                    <th width="120">性别</th>
+                    <td>{$smarty.session.oneMember->sex}</td>
+                </tr>
+                <tr>
+                    <th width="120">手机号</th>
+                    <td>
+                        {$smarty.session.oneMember->phone}
+                    </td>
+                </tr>
+                <tr>
+                    <th width="120">邮箱</th>
+                    <td>
+                        {$smarty.session.oneMember->email}
+                    </td>
+                </tr>
+                <tr>
+                    <th>出生日期</th>
+                    <td>
+                        {$smarty.session.oneMember->birth}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {/if}
+
+    {if $updateInfo}
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li><a href="?a=home">首页</a></li>
+                <li><a href="?a=home&m=showInfo">个人信息</a></li>
+                <li class="active">修改信息</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" enctype="multipart/form-data" action="">
+                <table class="table table-bordered table-striped table-hover person">
+                    <tr>
+                        <th width="120">会员名称</th>
+                        <td class="text-center"><h2>{$smarty.session.oneMember->user}</h2></td>
+                    </tr>
+                    <tr>
+                        <th width="">会员头像</th>
+                        <td>
+                            <img src="public/uploads/register/{$smarty.session.oneMember->pic}" width="50" height="50" id="preview">
+                            <label for="pic" style="position: relative;top: 15px;">修改头像</label>
+                            <input type="file" name="pic" id="pic" style="display: none">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="120">性别</th>
+                        <td>
+                            <input type="radio" name="sex" id="male" value="男" {$male}>
+                            <label for="male">：男</label>
+                            &nbsp; &nbsp; &nbsp;
+                            <input type="radio" name="sex" id="female" value="女" {$female}>
+                            <label for="female">：女</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="120">手机号</th>
+                        <td>
+                            <input type="text" class="form-control" name="phone" value="{$smarty.session.oneMember->phone}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="120">邮箱</th>
+                        <td>
+                            <input type="text" class="form-control" name="email" value="{$smarty.session.oneMember->email}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>出生日期</th>
+                        <td>
+                            <select class="year" name="year">
+                                {if $smarty.session.oneMember->birth}
+                                <option>{$smarty.session.oneMember->year}</option>
+                                {else}
+                                <option>请选择年份</option>
+                                {/if}
+                            </select>
+                            <select class="month" name="month">
+                                {if $smarty.session.oneMember->birth}
+                                <option>{$smarty.session.oneMember->month}</option>
+                                {else}
+                                <option>请选择月份</option>
+                                {/if}
+                            </select>
+                            <select class="day" name="day">
+                                {if $smarty.session.oneMember->birth}
+                                <option>{$smarty.session.oneMember->day}</option>
+                                {else}
+                                <option>请选择天数</option>
+                                {/if}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" id="person" value="提交" name="send" class="btn btn-success"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    {/if}
+    {include file='home/footer.html'}
+</div>
+<!---->
+<div id='progressBox'>
+    <div class='progress'>
+        <div id='progress-bar' class='progress-bar progress-bar-striped active' style='width: 0%;'>
+            <span id='num1'>0%</span>
+            <span id='num' style="display: none">0%</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

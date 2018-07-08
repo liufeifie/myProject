@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="libs/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="public/styles/admin.css" rel="stylesheet">
+    <link href="public/styles/Tools.css" rel="stylesheet">
+    <link href="public/styles/page.css" rel="stylesheet">
+    <script src='libs/requireJS/require.js' data-main="public/scripts/main"></script>
+</head>
+<body style="overflow-x:hidden;">
+<!--显示文章-->
+{if $show}
+<div class="row">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a href="?a=admin&m=welcome">后台首页</a></li>
+            <li><a href="?a=article&action=show">文章管理</a></li>
+            <li class="active">所有文章</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped table-hover text-center">
+            <tr><!--truncate:'10':'...'-->
+                <th>文章标题</th>
+                <th>文章属性</th>
+                <th>文章栏目</th>
+                <th>文章Tag</th>
+                <th>文章作者</th>
+                <th>文章来源</th>
+                <th>文章状态</th>
+                <th>文章导语</th>
+                <th>文章内容</th>
+                <th>文章操作</th>
+                <th width="80">批量删除<input type="checkbox" class="allCheck" id="allCheck"></th>
+            </tr>
+            {foreach $allArticle as $k=>$v}
+            <tr>
+                <td>
+                    <a href="?a=article&m=detail&id={$v->id}" target="_blank">
+                        {$v->title|truncate:'10':'...'}
+                    </a>
+                </td>
+                <td>{$v->attr}</td>
+                <td>{$v->nid|strip_tags|truncate:'10':'...':true}</td>
+                <td>{$v->tag|strip_tags|truncate:'10':'...':true}</td>
+                <td>{$v->author|strip_tags|truncate:'10':'...':true}</td>
+                <td>{$v->source|strip_tags|truncate:'10':'...':true}</td>
+                <td width="110">{$v->state}</td>
+                <td>{$v->lead|truncate:'10':'...'}</td>
+                <td>{$v->content|strip_tags|truncate:'20':'...':true}</td>
+                <td width="100">
+                    <a href="?a=article&action=update&id={$v->id}">
+                        <img src="public/images/icon_edit.gif" title="修改">
+                    </a>
+                    <a><!--href="?a=ad&action=delete&id={$v->id}"-->
+                        <img src="public/images/icon_drop.gif" title="删除" class="delete" name="{$v->id}">
+                    </a>
+                </td>
+                <td class="text-center">单选:
+                    <input type="checkbox" name="check[]" value="{$v->id}" class="choice">
+                </td>
+            </tr>
+            {/foreach}
+            <tr>
+                <td colspan="10" class="page">
+                    {$list}
+                </td>
+                <td>
+                    <input type="button" name="send" value="删除选中" class="btn btn-primary send1">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{/if}
+<!--添加文章-->
+{if $add}
+<div class="row">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a href="?a=admin&m=welcome">后台首页</a></li>
+            <li><a href="?a=article&action=show">文章管理</a></li>
+            <li class="active">添加文章</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" action="" enctype="multipart/form-data">
+            <table class="table table-bordered table-striped table-hover article">
+                <tr>
+                    <th>文章栏目 :</th>
+                    <td>
+                        <select name="nid" class="form-control input-sm" style="width: 20%;appearance:none">
+                            <option>必须选择一个栏目</option>
+                            {$nav}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>文章属性 :</th>
+                    <td>
+                        <input type="checkbox" name="attr[]" value="1" id="headline">
+                        <label for="headline">头条</label>
+                        <input type="checkbox" name="attr[]" value="2" id="recommend">
+                        <label for="recommend">推荐</label>
+                        <input type="checkbox" name="attr[]" value="3" id="dissertation">
+                        <label for="dissertation">专题</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>文章标题 :</th>
+                    <td><input type="text" name="title" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>文章作者 :</th>
+                    <td><input type="text" name="author" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>文章Tag:</th>
+                    <td><input type="text" name="tag" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>缩略图 :</th>
+                    <td>
+                        <label for="pic" style="cursor: pointer">上传文件</label>
+                        <input type="file" name="pic" id="pic" style="display: none">
+                    </td>
+                </tr>
+                <tr>
+                    <th>缩略图预览 :</th>
+                    <td><img src="public/images/default.png" width="100" id="preview"></td>
+                </tr>
+                <tr>
+                    <th>文章来源 :</th>
+                    <td><input type="text" name="source" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>文章导语 :</th>
+                    <td><input type="text" name="lead" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>文章内容 :</th>
+                    <td width="85%">
+                        <textarea id="commentEditor" name="content" type="width:100%">
+
+                        </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <input type="submit" name="send" class="btn btn-primary">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+{/if}
+{if $update}
+<div class="row">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a href="?a=admin&m=welcome">后台首页</a></li>
+            <li><a href="?a=article&action=show">文章管理</a></li>
+            <li class="active">修改文章</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" action="" enctype="multipart/form-data">
+            <table class="table table-bordered table-striped table-hover article">
+                <tr>
+                    <th>文章栏目 :</th>
+                    <td>
+                        <select name="nid" class="form-control input-sm" style="width: 20%;appearance:none">
+                            <option>必须选择一个栏目</option>
+                            {$nav}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>文章属性 :</th>
+                    <td>
+                        <input type="checkbox" name="attr[]" value="1" id="headline1" {$headline}>
+                        <label for="headline1">头条</label>
+                        <input type="checkbox" name="attr[]" value="2" id="recommend1" {$recommend}>
+                        <label for="recommend1">推荐</label>
+                        <input type="checkbox" name="attr[]" value="3" id="dissertation1" {$dissertation}>
+                        <label for="dissertation1">专题</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>文章标题 :</th>
+                    <td><input type="text" name="title" class="form-control" value="{$oneArticle->title}"></td>
+                </tr>
+                <tr>
+                    <th>文章作者 :</th>
+                    <td><input type="text" name="author" class="form-control" value="{$oneArticle->author}"></td>
+                </tr>
+                <tr>
+                    <th>文章Tag:</th>
+                    <td><input type="text" name="tag" class="form-control" value="{$oneArticle->tag}"></td>
+                </tr>
+                <tr>
+                    <th>缩略图 :</th>
+                    <td>
+                        <label for="pic" style="cursor: pointer">上传文件</label>
+                        <input type="file" name="pic" id="pic" style="display: none">
+                    </td>
+                </tr>
+                <tr>
+                    <th>缩略图预览 :</th>
+                    <td>
+                        <img src="public/uploads/article/{$oneArticle->thumbnail}" width="100">
+                        <img src="public/images/default.png" width="100" id="preview">
+                    </td>
+                </tr>
+                <tr>
+                    <th>文章来源 :</th>
+                    <td><input type="text" name="source" class="form-control" value="{$oneArticle->source}"></td>
+                </tr>
+                <tr>
+                    <th>文章导语 :</th>
+                    <td><input type="text" name="lead" class="form-control" value="{$oneArticle->lead}"></td>
+                </tr>
+                <tr>
+                    <th>文章内容 :</th>
+                    <td width="85%">
+                        <textarea id="commentEditor" name="content" type="width:100%">
+                         {$oneArticle->content}
+                        </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <input type="submit" name="send" class="btn btn-primary">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+{/if}
+<!--弹出框-->
+<div class="row">
+    <div class="col-md-12">
+        <div id="Msg" class="modal">
+            <div class="modal-dialog modal-sm ext-center">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <p class="h2 infoTip">是否确认删除</p>
+                        <button class="btn btn-primary confirmArticle" data-dismiss="modal">确认</button>
+                        <button class="btn btn-primary cancel" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--进度条-->
+<div id='progressBox' style="display: none">
+    <div class='progress'>
+        <div id='progress-bar' class='progress-bar progress-bar-striped active'
+             style='width: 0%;'><span id='num1'>0%</span>
+            <span id='num' style="display: none">0%</span>
+        </div>
+    </div>
+</div>
+<!--编辑-->
+<script src="libs/ueditor/utf8-php/ueditor.config.js"></script>
+<script src="libs/ueditor/utf8-php/ueditor.all.js"></script>
+<script>
+    var ue = UE.getEditor('commentEditor');
+</script>
+
+</body>
+</html>

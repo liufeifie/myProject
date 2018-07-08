@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>subnav</title>
+    <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="libs/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="public/styles/home.css" rel="stylesheet">
+    <!-- <script src="libs/requireJS/require.js" data-main="public/scripts/admin"></script>-->
+    <script src="libs/requireJS/require.js" data-main="public/scripts/home"></script>
+</head>
+<body class="body">
+{include file='home/header.html'}
+<div class="container">
+    <!--有子导航-->
+    {if $one}
+    {foreach $frontNav as $k=>$v}
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li><a href="?a=home">首页</a></li>
+                <li>{$v->name}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row allArticle">
+        <div class="col-md-12">
+            <table class="table table-hover ">
+                {foreach $allTargetNav[$k] as $ks1=>$vs1}
+                <tr class="article">
+                    <td>
+                        <a href="?a=article&m=detail&id={$vs1->id}" target="_blank">
+                            <img src="public/uploads/article/{$vs1->thumbnail}" alt="" class="img-circle" height="100"
+                                 width="80">
+                        </a>
+                    </td>
+                    <td class="infoArticle">
+                        <a href="?a=article&m=detail&id={$vs1->id}" target="_blank" class="h2">
+                            {$vs1->title|strip_tags|truncate:'15':'...':true}
+                        </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span>
+                            <b>栏目:</b> {$vs1->nid}
+                            <b>作者:</b> {$vs1->author}
+                            <b>来源:</b> {$vs1->source}
+                            <b>浏览次数:</b> {$vs1->pageview}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="?a=article&m=detail&id={$vs1->id}" target="_blank">
+                            {$vs1->content|strip_tags|truncate:'120':'...':true}
+                        </a>
+                    </td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+    </div>
+    {/foreach}
+    {/if}
+    <!--没有子导航-->
+    {if $two}
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li><a href="?a=home">首页</a></li>
+                <li>{$name}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row allArticle">
+        <div class="col-md-12">
+            <table class="table table-hover ">
+                {foreach $targetArticle as $k=>$v}
+                <tr class="article">
+                    <td>
+                        <a href="?a=article&m=detail&id={$v->id}" target="_blank">
+                            <img src="public/uploads/article/{$v->thumbnail}" alt="" class="img-circle" height="100"
+                                 width="80">
+                        </a>
+                    </td>
+                    <td class="infoArticle">
+                        <a href="?a=article&m=detail&id={$v->id}" target="_blank" class="h2">
+                            {$v->title|strip_tags|truncate:'15':'...':true}
+                        </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span>
+                            <b>栏目:</b> {$v->nid}
+                            <b>作者:</b> {$v->author}
+                            <b>来源:</b> {$v->source}
+                            <b>浏览次数:</b> {$v->pageview}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="?a=article&m=detail&id={$v->id}" target="_blank">
+                            {$v->content|strip_tags|truncate:'120':'...':true}
+                        </a>
+                    </td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+    </div>
+    {/if}
+    {include file='home/footer.html'}
+</div>
+<div id='progressBox'>
+    <div class='progress'>
+        <div id='progress-bar' class='progress-bar progress-bar-striped active' style='width: 0%;'>
+            <span id='num1'>0%</span>
+            <span id='num' style="display: none">0%</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

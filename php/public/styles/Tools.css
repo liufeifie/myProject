@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+/*
+#Redirect{
+	padding:20px;
+	position:absolute;
+	width:200px;
+	text-align:center;
+	z-index:1500;
+	font-size:20px;
+	background-color:#fff;
+	-webkit-background-clip:padding-box;
+	background-clip:padding-box;
+	border:1px solid #999;
+	border:1px solid rgba(0,0,0,.2);
+	border-radius:6px;
+	outline:0;
+	-webkit-box-shadow:0 3px 9px rgba(0,0,0,.5);
+	box-shadow:0 3px 9px rgba(0,0,0,.5);
+}*/
+#progressBox1,#progressBox{
+	padding:40px 20px 20px;
+	position:absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin: auto;
+	width:300px;
+	height: 120px;
+	z-index:1500;
+	font-size:20px;
+	background-color:#fff;
+	-webkit-background-clip:padding-box;
+	background-clip:padding-box;
+	border:1px solid #999;
+	border:1px solid rgba(0,0,0,.2);
+	border-radius:6px;
+	outline:0;
+	-webkit-box-shadow:0 3px 9px rgba(0,0,0,.5);
+	box-shadow:0 3px 9px rgba(0,0,0,.5);
+}
+#progress-bar{
+	height: 30px;
+	line-height: 30px;
+}
+.progress{
+	width:100%;
+	height: 30px;
+	line-height: 30px;
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>level</title>
+    <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="libs/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="public/styles/admin.css" rel="stylesheet">
+    <link href="public/styles/page.css" rel="stylesheet">
+    <link href="public/styles/Tools.css" rel="stylesheet">
+    <script src="libs/requireJS/require.js" data-main="public/scripts/main"></script>
+</head>
+<body style="overflow-x:hidden;">
+{if $show}
+<div class="row">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a href="?a=admin&m=welcome">后台首页</a></li>
+            <li><a href="?a=level&action=show">等级管理</a></li>
+            <li><a href="?a=level&action=add">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a></li>
+            <li class="active">所有等级</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <table class="table table-striped table-hover table-bordered">
+            <tr>
+                <th>等级名称:</th>
+                <th>等级描述:</th>
+                <th>等级权限:</th>
+                <th>操作:</th>
+                <th>批量删除:<input type="checkbox" class="allCheck"></th>
+            </tr>
+            {if $allLevel}
+            {foreach $allLevel as $k=>$v}
+            <tr>
+                <td>{$v->name}</td>
+                <td>{$v->description}</td>
+                <td>{$v->pid}</td>
+                <td>
+                    <a href="?a=level&action=update&id={$v->id}">
+                        <img src="public/images/icon_edit.gif" title="修改">
+                    </a>
+                    <a><!--href="?a=level&action=delete&id={$v->id}"-->
+                        <img src="public/images/icon_drop.gif" title="删除" class="delete" name="{$v->id}">
+                    </a>
+                </td>
+                <td>选择:<input type="checkbox" class="choice" name="choice[]" value="{$v->id}"></td>
+            </tr>
+            {/foreach}
+            <tr>
+                <td colspan="4" class="page">{$list}</td>
+                <td><input type="submit" value="删除选中" name="send" class="btn btn-primary send1"></td>
+            </tr>
+            {else}
+            {/if}
+        </table>
+    </div>
+</div>
+{/if}
+{if $add}
+<div class="row">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a href="?a=admin&m=welcome">后台首页</a></li>
+            <li><a href="?a=level&action=show">等级管理</a></li>
+            <li class="active">添加等级</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form action="" method="post">
+            <table class="table table-striped table-hover article">
+                <tr>
+                    <th width="120">等级名称:</th>
+                    <td><input type="text" name="name" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>等级描述:</th>
+                    <td><textarea name="description" class="form-control"></textarea></td>
+                </tr>
+                <tr>
+                    <th>等级权限:</th>
+                    <td>{$permission}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="提交" name="send" class="btn btn-primary"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+{/if}
+{if $update}
+<div class="row">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a href="?a=admin&m=welcome">后台首页</a></li>
+            <li><a href="?a=level&action=show">等级管理</a></li>
+            <li class="active">修改等级</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form action="" method="post">
+            <table class="table table-striped table-hover article">
+                <tr>
+                    <th width="120">等级名称:</th>
+                    <td><input type="text" name="name" class="form-control" value="{$oneLevel->name}"></td>
+                </tr>
+                <tr>
+                    <th>等级描述:</th>
+                    <td><textarea name="description" class="form-control">{$oneLevel->description}</textarea></td>
+                </tr>
+                <tr>
+                    <th>等级权限:</th>
+                    <td>{$permission}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="提交" name="send" class="btn btn-primary"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+{/if}
+<!--弹出框-->
+<div class="row">
+    <div class="col-md-12">
+        <div id="Msg" class="modal">
+            <div class="modal-dialog modal-sm ext-center">
+                <div class="modal-content">
+                    <!--<div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <span class="h3">模态框</span>
+                    </div>-->
+                    <div class="modal-body text-center">
+                        <p class="h2 infoTip">是否确认删除</p>
+                        <button class="btn btn-primary confirmLevel" data-dismiss="modal">确认</button>
+                        <button class="btn btn-primary cancel" data-dismiss="modal">取消</button>
+                    </div>
+                    <!-- <div class="modal-footer">
+                         <button class="btn btn-primary" data-dismiss="modal">确认</button>
+                         <button class="btn btn-primary" data-dismiss="modal">取消</button>
+                     </div-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--进度条-->
+<div id='progressBox' style="display: none">
+    <div class='progress'>
+        <div id='progress-bar' class='progress-bar progress-bar-striped active'
+             style='width: 0%;'><span id='num1'>0%</span>
+            <span id='num' style="display: none">0%</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

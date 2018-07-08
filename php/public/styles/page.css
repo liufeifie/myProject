@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+.page ul {
+    float:left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.page li {
+    display: inline-block;
+    margin-left: 15px;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+}
+
+.present {
+    color: #fff;
+    background: orange;
+}
+
+li.ellipsis {
+    border: 0;
+}
