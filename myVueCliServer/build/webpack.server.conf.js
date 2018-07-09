@@ -16,6 +16,19 @@ module.exports = merge(baseConfig, {
   externals: nodeExternals({
     whitelist: /\.css$/
   }),
+  module: {
+    rules: [
+      /*{
+        test: /\.js$/,
+        use: ['babel-loader'],
+        exclude: path.resolve(__dirname, 'node_modules')
+      }, {
+        //css代码不能被打包进用于服务端的代码中去，忽略掉css文件
+        test: /\.css/,
+        use: ["ignore-loader"]
+      }*/
+    ]
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
