@@ -22,6 +22,17 @@ export default {
       bodyStyle: 'background-color:  #fff;'
     }
   },
+  asyncData ({store, route}) {
+    return store.dispatch('FETCH', [
+      {
+        urlKey: 'test',
+        key: 'test'
+      }, {
+        urlKey: 'pcx',
+        key: 'pcx'
+      }
+    ])
+  },
   created () {
   },
   mounted () {

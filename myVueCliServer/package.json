@@ -11,10 +11,10 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "buildPrev": "rimraf dist && node build/build.js",
+    "buildPrev": "rmdir /s/q dist && rimraf dist && node build/build.js",
     "build:client": "node build/build.js",
     "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.server.conf.js --progress --hide-modules",
-    "build": "rmdir /s/q dist && npm run build:client && npm run build:server"
+    "build": "npm run build:client && npm run build:server"
   },
   "dependencies": {
     "vue": "^2.5.2",
@@ -38,6 +38,7 @@
     "babel-register": "^6.22.0",
     "chalk": "^2.0.1",
     "chromedriver": "^2.27.2",
+    "clean-webpack-plugin": "^0.1.19",
     "cookie-parser": "^1.4.3",
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^5.2.0",
