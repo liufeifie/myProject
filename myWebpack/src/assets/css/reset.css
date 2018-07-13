@@ -1,0 +1,10 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.transition{
+    transition: all 1s ease;
+}
+.flex{
+    display: flex;
+}

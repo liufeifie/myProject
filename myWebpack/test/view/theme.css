@@ -1,0 +1,7 @@
+.flex{
+    display: flex;
+}
+
+.transition{
+    transition: all 1s ease;
+}

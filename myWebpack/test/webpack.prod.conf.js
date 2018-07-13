@@ -1,10 +1,7 @@
-const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 
 function resolve(dir) {
@@ -13,10 +10,10 @@ function resolve(dir) {
 module.exports = {
   // context: resolve('./'),
   entry: {
-    index: resolve('src/main.js')
+    index: resolve('./test/test.js')
   },
   output: {
-    path: resolve('dist'),
+    path: resolve('./test/dist'),
     filename: '[name]-[chunkhash:8].js',
     publicPath: '',
     chunkFilename: '[name]-[chunkhash:8].js'
@@ -38,31 +35,19 @@ module.exports = {
       }, {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: resolve('src')
+        include: resolve('./test')
       }
     ]
   },
   plugins: [
-    new OptimizeCSSPlugin(),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          warnings: false,
-          drop_debugger: true,
-          drop_console: true
-        }
-      },
-      sourceMap: true,
-      parallel: true
-    }),
-    new ExtractTextPlugin("[name]-[contenthash:8].css"),
+    new ExtractTextPlugin("./css/[name]-[contenthash:8].css"),
     new HtmlWebpackPlugin({
       filename: './index.html',
-      template: './src/index.html',
+      template: './test/index.html',
       inject: true,
       hash: true
     }),
-    new CleanWebpackPlugin(resolve('./dist'), {
+    new CleanWebpackPlugin(resolve('./test/dist'), {
       root: resolve('./'),
       verbose: true,
       dry: false
