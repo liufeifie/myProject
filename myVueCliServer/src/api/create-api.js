@@ -1,7 +1,7 @@
 const axios = require('axios')
 const qs = require('querystring')
 // console.log('**************************api3', process.env.VUE_ENV, process.env.NODE_ENV)
-let baseURL = 'http://www.server.com'
+let baseURL = 'http://host805131605.s689.pppf.com.cn/php'
 if (process.env.VUE_ENV === 'client') baseURL = '/api'
 const instance = axios.create({
   baseURL: baseURL, // /api
