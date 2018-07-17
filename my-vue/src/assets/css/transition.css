@@ -1,0 +1,12 @@
+/* 筛选框 动画 */
+.slide-up-fade-enter-active {
+  transition: all .5s ease;
+}
+.slide-up-fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-up-fade-enter, .slide-up-fade-leave-to
+  /* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateY(100%);
+  opacity: 0;
+}
